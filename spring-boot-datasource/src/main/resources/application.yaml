@@ -1,0 +1,16 @@
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    primary:
+      url: "jdbc:mysql://127.0.0.1:3306/ch_student?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=GMT"
+      username: "root"
+      password: "Mysql%^&890_mysql"
+    secondary:
+      jdbc-url: "jdbc:mysql://127.0.0.1:3306/ch_teacher?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=GMT"
+      username: "root"
+      password: "Mysql%^&890_mysql"
+  jpa:
+    hibernate.ddl-auto: "update"
