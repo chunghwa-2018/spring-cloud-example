@@ -14,3 +14,4 @@ spring:
       password: "Mysql%^&890_mysql"
   jpa:
     hibernate.ddl-auto: "update"
+    show-sql: true

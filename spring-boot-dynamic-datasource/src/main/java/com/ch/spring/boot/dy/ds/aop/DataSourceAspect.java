@@ -3,10 +3,10 @@ package com.ch.spring.boot.dy.ds.aop;
 import com.ch.spring.boot.dy.ds.annotation.DataSource;
 import com.ch.spring.boot.dy.ds.config.DynamicDataSource;
 import com.ch.spring.boot.dy.ds.constant.DataSourceConstant;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
@@ -26,28 +26,27 @@ import java.lang.reflect.Method;
 @Component
 public class DataSourceAspect implements Ordered {
 
-    @Pointcut("@annotation(com.ch.spring.boot.dy.ds.annotation.DataSource)")
-    public void dataSourcecPointcut() {
+    @Before("@annotation(com.ch.spring.boot.dy.ds.annotation.DataSource)")
+    public void beforeSwitchDataSource(JoinPoint point) {
 
-    }
-
-    @Around("dataSourcecPointcut()")
-    public Object around(ProceedingJoinPoint point) throws Throwable {
+        // 获取当前访问的 class
+        Class<?> className = point.getTarget().getClass();
+        // 获取当前方法名
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
 
         DataSource dataSource = method.getAnnotation(DataSource.class);
-        if (dataSource.value().equals(DataSourceConstant.DATASOURCE_PRIMARY)) {
-            DynamicDataSource.setDataSource(DataSourceConstant.DATASOURCE_PRIMARY);
+        if (null != dataSource.value()) {
+            DynamicDataSource.setDataSource(dataSource.value());
         } else {
-            DynamicDataSource.setDataSource(DataSourceConstant.DATASOURCE_SECONDARY);
+            DynamicDataSource.setDataSource(DataSourceConstant.DATASOURCE_PRIMARY);
         }
 
-        try {
-            return point.proceed();
-        } finally {
-            DynamicDataSource.clearDataSource();
-        }
+    }
+
+    @After("@annotation(com.ch.spring.boot.dy.ds.annotation.DataSource)")
+    public void afterSwitchDataSource() {
+        DynamicDataSource.clearDataSource();
     }
 
     @Override
