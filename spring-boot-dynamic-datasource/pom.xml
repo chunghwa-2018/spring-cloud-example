@@ -8,7 +8,7 @@
 		<version>2.7.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ch.spring.boot.dy.ds</groupId>
+	<groupId>com.ch.spring.boot.ds</groupId>
 	<artifactId>spring-boot-dynamic-datasource</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-dynamic-datasource</name>
