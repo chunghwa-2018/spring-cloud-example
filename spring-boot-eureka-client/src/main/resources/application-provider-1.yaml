@@ -1,10 +1,7 @@
 
 server:
   port: 8083
-spring:
-  application:
-    name: student-service
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-1:8081/eureka/,http://eureka-2:8082/eureka/
+      defaultZone: http://127.0.0.1:8081/eureka/,http://127.0.0.1:8082/eureka/

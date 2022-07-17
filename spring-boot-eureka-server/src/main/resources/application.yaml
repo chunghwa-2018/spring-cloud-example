@@ -1,16 +1,4 @@
 
-server:
-  port: 8081
-eureka:
-  instance:
-    hostname: 127.0.0.1
-  server:
-    # 关闭自我保护机制
-    enable-self-preservation: false
-  client:
-    # 不向注册中心注册自己
-    register-with-eureka: false
-    # 维护实例，不需要检索服务
-    fetch-registry: false
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  application:
+    name: eureka-server

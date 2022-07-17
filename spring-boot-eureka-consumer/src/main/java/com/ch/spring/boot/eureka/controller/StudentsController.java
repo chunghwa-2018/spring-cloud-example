@@ -3,7 +3,8 @@ package com.ch.spring.boot.eureka.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("/student")
 public class StudentsController {
 
     /**
@@ -27,21 +27,25 @@ public class StudentsController {
      */
     private static final Logger logger = LoggerFactory.getLogger(StudentsController.class);
 
-    //@Autowired
-    //private DiscoveryClient discoveryClient;
-
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/consumer")
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
+
+    @RequestMapping("/consumer")
     public String consumer() {
-        logger.info("------");
-        String url = "http://STUDENT-SERVICE/student/eureka";
-        String str = restTemplate.getForEntity(url, String.class).getBody();
-        return str;
+        ServiceInstance instance = loadBalancerClient.choose("STUDENT-SERVICE");
+        // String url = String.format("http://%s:%s/hello", instance.getHost(), instance.getPort());
+        String url = String.format("http://%s/hello", instance.getServiceId());
+        // String url = "http://STUDENT-SERVICE/hello";
+        logger.info("host:{}", instance.getHost());
+        logger.info("port:{}",instance.getPort());
+        logger.info("url:{}", url);
+        return restTemplate.getForEntity(url, String.class).getBody();
     }
 
-    @GetMapping("/index")
+    @RequestMapping("/index")
     public String index() {
        return "hello";
     }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("/student")
 public class StudentsController {
 
     /**
@@ -29,8 +28,9 @@ public class StudentsController {
     //@Autowired
     //private DiscoveryClient discoveryClient;
 
-    @RequestMapping("/eureka")
+    @RequestMapping("/hello")
     public String index() {
-        return "hello eureka";
+        logger.info("看看是否负载均衡");
+        return "hello,world!";
     }
 }

@@ -1,11 +1,7 @@
 
 server:
   port: 8085
-spring:
-  application:
-    name: student-consumer
 eureka:
   client:
-    fetch-registry: true
     service-url:
-      defaultZone: http://eureka-1:8081/eureka/,http://eureka-2:8082/eureka/
+      defaultZone: http://127.0.0.1:8081/eureka/,http://127.0.0.1:8082/eureka/
