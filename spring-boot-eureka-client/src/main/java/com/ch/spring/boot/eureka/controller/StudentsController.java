@@ -1,9 +1,7 @@
 package com.ch.spring.boot.eureka.controller;
 
-import com.netflix.discovery.DiscoveryClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +23,8 @@ public class StudentsController {
      */
     private static final Logger logger = LoggerFactory.getLogger(StudentsController.class);
 
-    //@Autowired
-    //private DiscoveryClient discoveryClient;
+//    @Autowired
+//    private DiscoveryClient client;
 
     @RequestMapping("/hello")
     public String index() {

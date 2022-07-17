@@ -35,13 +35,22 @@ public class StudentsController {
 
     @RequestMapping("/consumer")
     public String consumer() {
+
+        // TODO 第一种方式
         ServiceInstance instance = loadBalancerClient.choose("STUDENT-SERVICE");
         // String url = String.format("http://%s:%s/hello", instance.getHost(), instance.getPort());
         String url = String.format("http://%s/hello", instance.getServiceId());
+
+        // TODO 第二种方式
         // String url = "http://STUDENT-SERVICE/hello";
+
+        logger.info("instanceId:{}", instance.getInstanceId());
+        logger.info("serviceId:{}", instance.getServiceId());
         logger.info("host:{}", instance.getHost());
-        logger.info("port:{}",instance.getPort());
+        logger.info("port:{}", instance.getPort());
+        logger.info("uri:{}", instance.getUri());
         logger.info("url:{}", url);
+
         return restTemplate.getForEntity(url, String.class).getBody();
     }
 
