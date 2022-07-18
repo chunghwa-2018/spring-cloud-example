@@ -12,7 +12,7 @@
         <module>spring-boot-datasource</module>
         <module>spring-boot-dynamic-datasource</module>
         <module>spring-boot-eureka-server</module>
-        <module>spring-boot-eureka-client</module>
+        <module>spring-boot-eureka-provider</module>
         <module>spring-boot-eureka-consumer</module>
     </modules>
 
