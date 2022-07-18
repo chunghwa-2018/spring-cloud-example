@@ -1,6 +1,8 @@
 package com.ch.spring.boot.eureka.controller;
 
 import com.ch.spring.boot.eureka.model.Student;
+import com.ch.spring.boot.eureka.service.StudentsService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,9 @@ public class StudentsController {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
 
+    @Autowired
+    private StudentsService studentsService;
+
     /**
      * 消费者 get 请求
      * http post http://127.0.0.1:8085/hello
@@ -57,23 +62,16 @@ public class StudentsController {
      */
     @RequestMapping("/hello")
     public String hello() {
-
-        // TODO 第一种方式
-        ServiceInstance instance = loadBalancerClient.choose(STUDENT_SERVICE);
-        // String url = String.format("http://%s:%s/hello", instance.getHost(), instance.getPort());
-        String url = String.format("http://%s/hello", instance.getServiceId());
-
-        // TODO 第二种方式
-        // String url = "http://STUDENT-SERVICE/hello";
-
-        logger.info("instanceId:{}", instance.getInstanceId());
-        logger.info("serviceId:{}", instance.getServiceId());
-        logger.info("host:{}", instance.getHost());
-        logger.info("port:{}", instance.getPort());
-        logger.info("uri:{}", instance.getUri());
-        logger.info("url:{}", url);
-
-        return restTemplate.getForEntity(url, String.class).getBody();
+        // 开始时间
+        Long beginTime = System.currentTimeMillis();
+        logger.info("beginTime:{}", beginTime);
+        // 调用 student-service
+        String str = studentsService.hello();
+        // 结束时间
+        Long endTime = System.currentTimeMillis();
+        logger.info("endTime:{}", endTime);
+        logger.info("Speed time:" + (endTime - beginTime));
+        return str;
     }
 
     /**

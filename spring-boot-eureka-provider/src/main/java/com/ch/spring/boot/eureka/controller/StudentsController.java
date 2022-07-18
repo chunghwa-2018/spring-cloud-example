@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Random;
 
 
 /**
@@ -40,6 +41,13 @@ public class StudentsController {
     @GetMapping("/hello")
     public String hello() {
         logger.info("看看是否负载均衡");
+        int sleepTime = new Random().nextInt(3000);
+        logger.info("sleepTime:{}", sleepTime);
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "hello,world!";
     }
 
