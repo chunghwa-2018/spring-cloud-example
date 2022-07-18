@@ -1,12 +1,5 @@
-package com.ch.spring.boot.dy.ds.student.model;
+package com.ch.spring.boot.eureka.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -18,34 +11,26 @@ import java.io.Serializable;
  * @Date 2022-07-15 13:54
  * @Version 1.0
  */
-@Entity
-@Table(name = "STUDENT")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Student implements Serializable {
 
     /**
      * id
      */
-    @Id
-    @GeneratedValue
     private Long id;
 
     /**
      * 姓名
      */
-    @Column(name = "s_name")
     private String name;
 
     /**
      * 生日
      */
-    @Column(name = "s_birth")
     private String birth;
 
     /**
      * 性别
      */
-    @Column(name = "s_sex")
     private Integer sex;
 
     /**
@@ -139,5 +124,15 @@ public class Student implements Serializable {
         this.name = name;
         this.birth = birth;
         this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birth='" + birth + '\'' +
+                ", sex=" + sex +
+                '}';
     }
 }
