@@ -5,9 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import javax.ws.rs.POST;
+import java.util.Map;
 
 
 /**
@@ -33,8 +38,14 @@ public class StudentsController {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
 
-    @RequestMapping("/consumer")
-    public String consumer() {
+    /**
+     * 消费者 get 请求
+     * http post http://127.0.0.1:8085/hello
+     *
+     * @return
+     */
+    @RequestMapping("/hello")
+    public String hello() {
 
         // TODO 第一种方式
         ServiceInstance instance = loadBalancerClient.choose("STUDENT-SERVICE");
@@ -54,6 +65,25 @@ public class StudentsController {
         return restTemplate.getForEntity(url, String.class).getBody();
     }
 
+    /**
+     * 消费者 post 请求
+     * http post http://127.0.0.1:8085/welcome name='andy'
+     *
+     * @param map
+     * @return
+     */
+    @PostMapping("/welcome")
+    public String weclome(@RequestBody Map<String, Object> map) {
+        ServiceInstance instance = loadBalancerClient.choose("STUDENT-SERVICE");
+        String url = String.format("http://%s/welcome?name={1}", instance.getServiceId());
+        return restTemplate.getForEntity(url, String.class,map.get("name")).getBody();
+    }
+
+    /**
+     * index
+     *
+     * @return
+     */
     @RequestMapping("/index")
     public String index() {
        return "hello";
