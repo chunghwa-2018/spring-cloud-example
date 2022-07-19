@@ -13,6 +13,12 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class EurekaConsumerApplication {
 
+	/**
+	 * @LoadBalanced
+	 * ribbon自动化配置负载均衡需要和RestTemplate一起使用
+	 * 自定义负载均衡，需要使用@RibbonClients注解
+	 * @return
+	 */
 	@Bean
 	@LoadBalanced
 	RestTemplate restTemplate() {
