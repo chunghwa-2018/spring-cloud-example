@@ -15,6 +15,7 @@
         <module>spring-boot-eureka-provider</module>
         <module>spring-boot-eureka-consumer</module>
         <module>spring-boot-hystrix-dashboard</module>
+        <module>spring-boot-feign-consumer</module>
     </modules>
 
     <properties>
