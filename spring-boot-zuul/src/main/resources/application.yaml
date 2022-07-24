@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api-geteway
+    name: api-gateway
 server:
   port: 8089
 
@@ -23,9 +23,6 @@ zuul:
       stripPrefix: true
       # 是否开启重试，具体重试设置是在Ribbon的配置中设置
       retryable: true
-ribbon:
-  eureka:
-    enabled: false
 
 eureka:
   client:
