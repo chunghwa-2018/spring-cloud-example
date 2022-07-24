@@ -4,8 +4,14 @@ spring:
 server:
   port: 8089
 
+# 路由规则
 zuul:
+  # 地址排除
+  ignored-patterns: /**/welcome/**/
+  ignored-services: feign-consumer
+  # 路由前缀
   prefix: /api
+  # 路由配置，如果不配，则遵循约定大于配置，默认以服务名称进行转发
   routes:
     api-a:
       path: /student-service/**
@@ -15,14 +21,14 @@ zuul:
       stripPrefix: true
       # 是否开启重试，具体重试设置是在Ribbon的配置中设置
       retryable: true
-    api-b:
-      path: /feign-consumer/**
-      serviceId: feign-consumer
-      # url: http://localhost:8088
-      # 转发前是否跳过前缀,默认为true， prefix: /api
-      stripPrefix: true
-      # 是否开启重试，具体重试设置是在Ribbon的配置中设置
-      retryable: true
+#    api-b:
+#      path: /feign-consumer/**
+#      serviceId: feign-consumer
+#      # url: http://localhost:8088
+#      # 转发前是否跳过前缀,默认为true， prefix: /api
+#      stripPrefix: true
+#      # 是否开启重试，具体重试设置是在Ribbon的配置中设置
+#      retryable: true
 
 eureka:
   client:
