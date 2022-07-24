@@ -1,6 +1,6 @@
 # spring-boot-example
 
-- [spring-boot-datasource](spring-boot-data-source)                          数据源
+- [spring-boot-datasource](spring-boot-datasource)                          数据源
 - [spring-boot-dynamic-datasource](spring-boot-dynamic-datasource)                  动态数据源
 - [spring-boot-eureka-consumer](spring-boot-eureka-consumer)                     ribbon 客户端负载均衡
 - [spring-boot-eureka-provider](spring-boot-eureka-provider)                     hystrix 断路器（服务熔断、降级、容错能力）
