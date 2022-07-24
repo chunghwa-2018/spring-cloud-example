@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -86,11 +87,23 @@ public class AccessFilter extends ZuulFilter {
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
             ctx.getResponse().setContentType("application/json; charset=utf-8");
-            PrintWriter printWriter = null;
-            printWriter.write("{\"message\":" + 401 + "}");
-            return ctx.getResponse();
+            PrintWriter writer = null;
+            try {
+                writer = ctx.getResponse().getWriter();
+                // 响应内容
+                writer.print("{\"message\":" + 401 + "}");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (null != writer) {
+                    writer.close();
+                }
+            }
+
+        } else {
+            logger.info("accessToken is ok!");
         }
-        logger.info("accessToken is ok!");
+
         return null;
 
     }
