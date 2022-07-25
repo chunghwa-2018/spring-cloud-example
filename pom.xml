@@ -17,6 +17,7 @@
         <module>spring-boot-hystrix-dashboard</module>
         <module>spring-boot-feign-consumer</module>
         <module>spring-boot-zuul</module>
+        <module>spring-boot-config-server</module>
     </modules>
 
     <properties>

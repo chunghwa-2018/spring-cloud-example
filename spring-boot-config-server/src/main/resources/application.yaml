@@ -1,0 +1,16 @@
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/chunghwa-2018/spring-boot-example.git
+          username: 15711385916@163.com
+          password: michaelchiu-1990
+          default-label: main
+
+server:
+  port: 8090
+
