@@ -7,6 +7,7 @@ spring:
       server:
         git:
           uri: https://github.com/chunghwa-2018/spring-boot-example.git
+          search-paths: spring-cloud-in-action/config-repo
           username: 15711385916@163.com
           password: michaelchiu-1990
           default-label: main
