@@ -18,13 +18,13 @@
     <modules>
         <module>spring-boot-datasource</module>
         <module>spring-boot-dynamic-datasource</module>
-        <module>spring-boot-eureka-server</module>
-        <module>spring-boot-eureka-provider</module>
-        <module>spring-boot-eureka-consumer</module>
-        <module>spring-boot-hystrix-dashboard</module>
-        <module>spring-boot-feign-consumer</module>
-        <module>spring-boot-zuul</module>
-        <module>spring-boot-config-server</module>
+        <module>spring-cloud-eureka-server</module>
+        <module>spring-cloud-eureka-provider</module>
+        <module>spring-cloud-eureka-consumer</module>
+        <module>spring-cloud-hystrix-dashboard</module>
+        <module>spring-cloud-feign-consumer</module>
+        <module>spring-cloud-zuul</module>
+        <module>spring-cloud-config-server</module>
     </modules>
 
     <properties>
