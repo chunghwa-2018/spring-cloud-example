@@ -1,4 +1,4 @@
-# spring-boot-example
+# spring-cloud-example
 
 - [spring-boot-datasource](spring-boot-datasource)                                 数据源
 - [spring-boot-dynamic-datasource](spring-boot-dynamic-datasource)                 动态数据源
