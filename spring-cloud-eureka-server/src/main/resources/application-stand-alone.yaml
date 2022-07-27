@@ -4,6 +4,8 @@ server:
 eureka:
   instance:
     hostname: localhost
+    # ip地址发现及注册
+    prefer-ip-address: false
   server:
     # 自我保护机制
     enable-self-preservation: false
