@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,9 +84,9 @@ public class StudentsController {
      * @return
      */
     @PostMapping("/welcome1")
-    public Student welcome(@RequestBody Student student) {
+    public Student welcome(@RequestBody Student student, @RequestParam("remark") String remark) {
         logger.info("student:{}", student.toString());
-        student = new Student(student.getId(), student.getName(), student.getBirth(), 2);
+        student = new Student(student.getId(), remark, student.getBirth(), 2);
         return student;
     }
 }
