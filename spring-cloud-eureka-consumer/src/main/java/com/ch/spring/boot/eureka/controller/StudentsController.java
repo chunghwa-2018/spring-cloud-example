@@ -3,6 +3,7 @@ package com.ch.spring.boot.eureka.controller;
 import com.ch.spring.boot.eureka.model.Student;
 import com.ch.spring.boot.eureka.service.StudentsService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,6 @@ public class StudentsController {
      */
     private static final Logger logger = LoggerFactory.getLogger(StudentsController.class);
 
-    /**
-     * STUDENT-SERVICE 服务
-     */
-    private static final String STUDENT_SERVICE = "STUDENT-SERVICE";
-
     @Autowired
     private RestTemplate restTemplate;
 
@@ -62,15 +58,19 @@ public class StudentsController {
      */
     @RequestMapping("/hello")
     public String hello() {
+
         // 开始时间
         Long beginTime = System.currentTimeMillis();
         logger.info("beginTime:{}", beginTime);
+
         // 调用 student-service
         String str = studentsService.hello();
+
         // 结束时间
         Long endTime = System.currentTimeMillis();
         logger.info("endTime:{}", endTime);
         logger.info("Speed time:" + (endTime - beginTime));
+
         return str;
     }
 
@@ -84,9 +84,12 @@ public class StudentsController {
     @GetMapping("/welcome")
     public String weclome(@RequestParam("name") String name) {
         logger.info("name:{}", name);
-        ServiceInstance instance = loadBalancerClient.choose(STUDENT_SERVICE);
-        String url = String.format("http://%s/welcome?name={1}", instance.getServiceId());
-        return restTemplate.getForEntity(url, String.class, name).getBody();
+
+        if (StringUtils.isEmpty(name)) {
+            return "name is empty!";
+        }
+
+        return studentsService.welcome(name);
     }
 
     /**
@@ -99,11 +102,12 @@ public class StudentsController {
     @GetMapping("/welcome/{id}")
     public Student welcome(@PathVariable("id") Long id) {
         logger.info("id:{}", id);
-        ServiceInstance instance = loadBalancerClient.choose(STUDENT_SERVICE);
-        String url = String.format("http://%s/welcome/{id}", instance.getServiceId());
-        ResponseEntity<Student> responseEntity = restTemplate.getForEntity(url, Student.class, id);
-        Student student = responseEntity.getBody();
-        return student;
+
+        if (null == id) {
+            return new Student(0L, "未知", "0000-00-00", 0);
+        }
+
+        return studentsService.welcome(id);
     }
 
     /**
@@ -118,10 +122,16 @@ public class StudentsController {
     public Student welcome1(@RequestHeader("token") String token, @RequestBody Student student) {
         logger.info("token:{}", token);
         logger.info("student:{}", student);
-        ServiceInstance instance = loadBalancerClient.choose(STUDENT_SERVICE);
-        String url = String.format("http://%s/welcome1", instance.getServiceId());
-        student = restTemplate.postForObject(url, student, Student.class, "秃噜扣碎否");
-        return student;
+
+        if (StringUtils.isEmpty(token)) {
+            return null;
+        }
+
+        if (null == student) {
+            return new Student(0L, "未知", "0000-00-00", 0);
+        }
+
+        return studentsService.welcome1(student);
     }
 
     /**

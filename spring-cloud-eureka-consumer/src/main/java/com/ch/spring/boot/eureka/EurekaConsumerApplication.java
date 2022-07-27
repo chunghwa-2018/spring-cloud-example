@@ -8,8 +8,9 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+// 当前版本约定大于配置，该注解已激活
+// @EnableDiscoveryClient
 @EnableHystrix
-@EnableDiscoveryClient
 @SpringBootApplication
 public class EurekaConsumerApplication {
 
