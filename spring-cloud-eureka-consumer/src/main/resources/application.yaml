@@ -4,5 +4,9 @@ spring:
     name: student-consumer
 eureka:
   client:
+    # 不向注册中心注册自己
+    register-with-eureka: false
+    # 从注册中心拉取服务的间隔时长，本地开发通常调短一点
+    registry-fetch-interval-seconds: 10
     service-url:
       defaultZone: http://127.0.0.1:8081/eureka/,http://127.0.0.1:8082/eureka/
