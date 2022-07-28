@@ -2,6 +2,18 @@
 spring:
   application:
     name: student-consumer
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开启 shutdown 端点访问
+        include: shutdown
+  endpoint:
+    shutdown:
+      # 开启 shutdown 实现优雅停服
+      enabled: true
+
 eureka:
   client:
     # 不向注册中心注册自己
