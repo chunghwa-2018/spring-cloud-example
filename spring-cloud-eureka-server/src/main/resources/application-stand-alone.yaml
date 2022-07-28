@@ -7,12 +7,14 @@ eureka:
     # ip地址发现及注册
     prefer-ip-address: false
   server:
-    # 自我保护机制
+    # 自我保护机制，默认是 true
     enable-self-preservation: false
+    # 清理间隔，默认是 60 * 1000, 单位：毫秒
+    eviction-interval-timer-in-ms: 60000
   client:
     # 不向注册中心注册自己
     register-with-eureka: false
     # 维护实例，不需要检索服务
     fetch-registry: false
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://root:123456@${eureka.instance.hostname}:${server.port}/eureka/

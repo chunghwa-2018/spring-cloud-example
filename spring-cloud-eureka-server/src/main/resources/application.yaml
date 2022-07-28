@@ -2,3 +2,18 @@
 spring:
   application:
     name: eureka-server
+  security:
+    user:
+      name: root
+      password: 123456
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开启 shutdown 端点访问
+        include: shutdown
+  endpoint:
+    shutdown:
+      # 开启 shutdown 实现优雅停服
+      enabled: true

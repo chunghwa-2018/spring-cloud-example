@@ -3,7 +3,18 @@ spring:
   application:
     name: student-service
 
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开启 shutdown 端点访问
+        include: shutdown
+  endpoint:
+    shutdown:
+      # 开启 shutdown 实现优雅停服
+      enabled: true
+
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:8081/eureka/,http://127.0.0.1:8082/eureka/
+      defaultZone: http://root:123456@127.0.0.1:8081/eureka/,http://root:123456@127.0.0.1:8082/eureka/
