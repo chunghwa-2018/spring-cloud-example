@@ -1,6 +1,7 @@
 package com.ch.spring.boot.eureka.config;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -24,5 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // TODO 第二种方式 忽略所有 /eureka/** 请求
         http.csrf().ignoringAntMatchers("/eureka/**");
         super.configure(http);
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/actuator/**");
     }
 }
