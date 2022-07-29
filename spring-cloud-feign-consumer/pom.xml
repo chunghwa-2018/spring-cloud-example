@@ -7,7 +7,7 @@
 		<artifactId>spring-cloud-example</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>spring-feign-consumer</artifactId>
+	<artifactId>spring-cloud-feign-consumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-cloud-feign-consumer</name>
 	<description>Demo project for Spring Cloud Feign Consumer</description>

@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>spring-cloud-eureka-provider</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-eureka-provider</name>
+	<name>spring-cloud-eureka-provider</name>
 	<description>Demo project for Spring Cloud Eureka Provider</description>
 
 	<dependencies>
