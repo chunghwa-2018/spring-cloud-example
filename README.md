@@ -8,11 +8,11 @@
 - [spring-cloud-feign-consumer](spring-cloud-feign-consumer)                       feign 声明式服务调用（ribbon + hystrix）
 - [spring-cloud-hystrix-dashboard](spring-cloud-hystrix-dashboard)                 hystrix dashboard 仪表盘
 - [spring-cloud-zuul](spring-cloud-zuul)                                           zuul 网关
-- [spring-cloud-config-server](spring-cloud-config-server)                         config-server 配置中心  
+- [spring-cloud-config-server](spring-cloud-config-server)                         config-server 配置中心
 - [spring-cloud-in-action](spring-cloud-in-action)                                 yaml config
 
 ## bug:
-- [spring-cloud-hystrix-dashboard](spring-cloud-hystrix-dashboard) 
+- [spring-cloud-hystrix-dashboard](spring-cloud-hystrix-dashboard)
 
 访问地址：
 
@@ -24,4 +24,4 @@ http://127.0.0.1:9999/actuator/
 
 http://127.0.0.1:9999/actuator/hystrix.stream
 
-  
+
